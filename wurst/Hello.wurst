@@ -1,0 +1,386 @@
+package Hello
+
+import Assets
+import ClosureTimers
+
+sound gg_snd_MuradinYes2 = null
+sound gg_snd_FurionWhat4 = null
+sound gg_snd_KeeperOfTheGroveYes5 = null
+sound gg_snd_KeeperOfTheGroveYes3 = null
+sound gg_snd_IllidanWhat2 = null
+sound gg_snd_HeroDemonHunterYes4 = null
+sound gg_snd_IllidanPissed1 = null
+sound gg_snd_ArcherPissed6 = null
+sound gg_snd_ShandrisPissed2 = null
+sound gg_snd_VillagerMAWhat6 = null
+sound gg_snd_IllidanPissed4 = null
+sound gg_snd_VillagerMAWhat4 = null
+sound gg_snd_DryadPissed1 = null
+sound gg_snd_O04Mannoroth38 = null
+sound gg_snd_U04AArthas09 = null
+sound gg_snd_HeroPaladinWhat2 = null
+sound gg_snd_MortarTeamWhat1 = null
+sound gg_snd_HeroBladeMasterYes4 = null
+sound gg_snd_HeroMoonPriestessWhat2 = null
+sound gg_snd_IllidanPissed5 = null
+sound gg_snd_ShandrisPissed4 = null
+sound gg_snd_ShandrisPissed3 = null
+sound gg_snd_HeroDemonHunterPissed7 = null
+sound gg_snd_FurionYesAttack2 = null
+sound gg_snd_IllidanPissed401 = null
+sound gg_snd_IllidanYes1 = null
+sound gg_snd_DryadPissed2 = null
+sound gg_snd_DryadWhat1 = null
+sound gg_snd_ShandrisYes1 = null
+sound gg_snd_ShandrisYesAttack2 = null
+sound gg_snd_IllidanPissed3 = null
+sound gg_snd_KeeperOfTheGrovePissed5 = null
+sound gg_snd_DryadYesAttack2 = null
+sound gg_snd_ArcherYesAttack1 = null
+sound gg_snd_ArcherPissed7 = null
+sound gg_snd_JainaYes3 = null
+sound gg_snd_WarlordYesAttack5 = null
+sound gg_snd_FurionWhat1 = null
+sound gg_snd_HeroDreadlordPissed5 = null
+sound gg_snd_DeathKnightWhat1 = null
+sound gg_snd_1Nevermind = null
+sound gg_snd_P2 = null
+sound gg_snd_VultureWhat1 = null
+sound gg_snd_GoblinMerchantWhat1 = null
+sound gg_snd_TyrandeWhat4 = null
+sound gg_snd_HeroArchMageWhat4 = null
+sound gg_snd_WolfriderPissed3 = null
+sound gg_snd_BuildingDeathSmallHuman = null
+sound gg_snd_OgreWhat1 = null
+sound gg_snd_HarpyYes1 = null
+sound gg_snd_WarlockAppears = null
+
+var keepFlushing = true
+function toiletFlush()
+	doPeriodically(ANIMATION_PERIOD) cb ->
+		if keepFlushing
+			gg_unit_emow_0010.setMana(0.)
+		else
+			destroy cb
+
+function initSounds()
+	gg_snd_MuradinYes2 = CreateSound("Units\\Human\\Muradin\\MuradinYes2.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_MuradinYes2, "MuradinYes")
+	SetSoundDuration(gg_snd_MuradinYes2, 1202)
+	gg_snd_FurionWhat4 = CreateSound("Units\\NightElf\\Furion\\FurionWhat4.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_FurionWhat4, "FurionWhat")
+	SetSoundDuration(gg_snd_FurionWhat4, 2206)
+	gg_snd_KeeperOfTheGroveYes5 = CreateSound("Units\\NightElf\\HeroKeeperOfTheGrove\\KeeperOfTheGroveYes5.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_KeeperOfTheGroveYes5, "HeroKeeperOfTheGroveYes")
+	SetSoundDuration(gg_snd_KeeperOfTheGroveYes5, 1036)
+	gg_snd_KeeperOfTheGroveYes3 = CreateSound("Units\\NightElf\\HeroKeeperOfTheGrove\\KeeperOfTheGroveYes3.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_KeeperOfTheGroveYes3, "HeroKeeperOfTheGroveYes")
+	SetSoundDuration(gg_snd_KeeperOfTheGroveYes3, 1292)
+	gg_snd_IllidanWhat2 = CreateSound("Units\\NightElf\\Illidan\\IllidanWhat2.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_IllidanWhat2, "IllidanWhat")
+	SetSoundDuration(gg_snd_IllidanWhat2, 1646)
+	gg_snd_HeroDemonHunterYes4 = CreateSound("Units\\NightElf\\HeroDemonHunter\\HeroDemonHunterYes4.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_HeroDemonHunterYes4, "HeroDemonHunterYes")
+	SetSoundDuration(gg_snd_HeroDemonHunterYes4, 935)
+	gg_snd_IllidanPissed1 = CreateSound("Units\\NightElf\\Illidan\\IllidanPissed1.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_IllidanPissed1, "IllidanPissed")
+	SetSoundDuration(gg_snd_IllidanPissed1, 2736)
+	gg_snd_ArcherPissed6 = CreateSound("Units\\NightElf\\Archer\\ArcherPissed6.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ArcherPissed6, "ArcherPissed")
+	SetSoundDuration(gg_snd_ArcherPissed6, 1628)
+	gg_snd_ShandrisPissed2 = CreateSound("Units\\NightElf\\Shandris\\ShandrisPissed2.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ShandrisPissed2, "ShandrisPissed")
+	SetSoundDuration(gg_snd_ShandrisPissed2, 2199)
+	gg_snd_VillagerMAWhat6 = CreateSound("Units\\Critters\\VillagerMan1\\VillagerMAWhat6.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_VillagerMAWhat6, "VillagerMan2What")
+	SetSoundDuration(gg_snd_VillagerMAWhat6, 917)
+	gg_snd_IllidanPissed4 = CreateSound("Units\\NightElf\\Illidan\\IllidanPissed4.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_IllidanPissed4, "IllidanPissed")
+	SetSoundDuration(gg_snd_IllidanPissed4, 3810)
+	gg_snd_VillagerMAWhat4 = CreateSound("Units\\Critters\\VillagerMan1\\VillagerMAWhat4.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_VillagerMAWhat4, "VillagerMan2What")
+	SetSoundDuration(gg_snd_VillagerMAWhat4, 1457)
+	gg_snd_DryadPissed1 = CreateSound("Units\\NightElf\\Dryad\\DryadPissed1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_DryadPissed1, "DryadPissed")
+	SetSoundDuration(gg_snd_DryadPissed1, 2345)
+	gg_snd_O04Mannoroth38 = CreateSound("Sound\\Dialogue\\OrcCampaign\\Orc04Interlude\\O04Mannoroth38.mp3", false, false, false, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_O04Mannoroth38, "O04Mannoroth38")
+	SetSoundDuration(gg_snd_O04Mannoroth38, 12617)
+	SetSoundPitch(gg_snd_O04Mannoroth38, 1.3)
+	gg_snd_U04AArthas09 = CreateSound("Sound\\Dialogue\\UndeadCampaign\\Undead04A\\U04AArthas09.mp3", false, false, false, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_U04AArthas09, "U04AArthas09")
+	SetSoundDuration(gg_snd_U04AArthas09, 1646)
+	gg_snd_HeroPaladinWhat2 = CreateSound("Units\\Human\\HeroPaladin\\HeroPaladinWhat2.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_HeroPaladinWhat2, "HeroPaladinWhat")
+	SetSoundDuration(gg_snd_HeroPaladinWhat2, 1185)
+	SetSoundPitch(gg_snd_HeroPaladinWhat2, 0.9)
+	gg_snd_MortarTeamWhat1 = CreateSound("Units\\Human\\MortarTeam\\MortarTeamWhat1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_MortarTeamWhat1, "MortarTeamWhat")
+	SetSoundDuration(gg_snd_MortarTeamWhat1, 1106)
+	SetSoundPitch(gg_snd_MortarTeamWhat1, 0.8)
+	gg_snd_HeroBladeMasterYes4 = CreateSound("Units\\Orc\\HeroBladeMaster\\HeroBladeMasterYes4.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_HeroBladeMasterYes4, "HeroBladeMasterYes")
+	SetSoundDuration(gg_snd_HeroBladeMasterYes4, 1175)
+	gg_snd_HeroMoonPriestessWhat2 = CreateSound("Units\\NightElf\\HeroMoonPriestess\\HeroMoonPriestessWhat2.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_HeroMoonPriestessWhat2, "HeroMoonPriestessWhat")
+	SetSoundDuration(gg_snd_HeroMoonPriestessWhat2, 1141)
+	gg_snd_IllidanPissed5 = CreateSound("Units\\NightElf\\Illidan\\IllidanPissed5.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_IllidanPissed5, "IllidanPissed")
+	SetSoundDuration(gg_snd_IllidanPissed5, 2425)
+	gg_snd_ShandrisPissed4 = CreateSound("Units\\NightElf\\Shandris\\ShandrisPissed4.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ShandrisPissed4, "ShandrisPissed")
+	SetSoundDuration(gg_snd_ShandrisPissed4, 1688)
+	SetSoundPitch(gg_snd_ShandrisPissed4, 0.9)
+	gg_snd_ShandrisPissed3 = CreateSound("Units\\NightElf\\Shandris\\ShandrisPissed3.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ShandrisPissed3, "ShandrisPissed")
+	SetSoundDuration(gg_snd_ShandrisPissed3, 2260)
+	gg_snd_HeroDemonHunterPissed7 = CreateSound("Units\\NightElf\\HeroDemonHunter\\HeroDemonHunterPissed7.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_HeroDemonHunterPissed7, "HeroDemonHunterPissed")
+	SetSoundDuration(gg_snd_HeroDemonHunterPissed7, 19667)
+	gg_snd_FurionYesAttack2 = CreateSound("Units\\NightElf\\Furion\\FurionYesAttack2.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_FurionYesAttack2, "FurionYesAttack")
+	SetSoundDuration(gg_snd_FurionYesAttack2, 1443)
+	SetSoundPitch(gg_snd_FurionYesAttack2, 0.9)
+	gg_snd_IllidanPissed401 = CreateSound("Units\\NightElf\\Illidan\\IllidanPissed4.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_IllidanPissed401, "IllidanPissed")
+	SetSoundDuration(gg_snd_IllidanPissed401, 3810)
+	gg_snd_IllidanYes1 = CreateSound("Units\\NightElf\\Illidan\\IllidanYes1.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_IllidanYes1, "IllidanYes")
+	SetSoundDuration(gg_snd_IllidanYes1, 846)
+	gg_snd_DryadPissed2 = CreateSound("Units\\NightElf\\Dryad\\DryadPissed2.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_DryadPissed2, "DryadPissed")
+	SetSoundDuration(gg_snd_DryadPissed2, 495)
+	SetSoundPitch(gg_snd_DryadPissed2, 0.6)
+	gg_snd_DryadWhat1 = CreateSound("Units\\NightElf\\Dryad\\DryadWhat1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_DryadWhat1, "DryadWhat")
+	SetSoundDuration(gg_snd_DryadWhat1, 517)
+	gg_snd_ShandrisYes1 = CreateSound("Units\\NightElf\\Shandris\\ShandrisYes1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ShandrisYes1, "ShandrisYes")
+	SetSoundDuration(gg_snd_ShandrisYes1, 909)
+	gg_snd_ShandrisYesAttack2 = CreateSound("Units\\NightElf\\Shandris\\ShandrisYesAttack2.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ShandrisYesAttack2, "ShandrisYesAttack")
+	SetSoundDuration(gg_snd_ShandrisYesAttack2, 1784)
+	gg_snd_IllidanPissed3 = CreateSound("Units\\NightElf\\Illidan\\IllidanPissed3.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_IllidanPissed3, "IllidanPissed")
+	SetSoundDuration(gg_snd_IllidanPissed3, 3556)
+	gg_snd_KeeperOfTheGrovePissed5 = CreateSound("Units\\NightElf\\HeroKeeperOfTheGrove\\KeeperOfTheGrovePissed5.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_KeeperOfTheGrovePissed5, "HeroKeeperOfTheGrovePissed")
+	SetSoundDuration(gg_snd_KeeperOfTheGrovePissed5, 1942)
+	SetSoundPitch(gg_snd_KeeperOfTheGrovePissed5, 0.9)
+	gg_snd_DryadYesAttack2 = CreateSound("Units\\NightElf\\Dryad\\DryadYesAttack2.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_DryadYesAttack2, "DryadYesAttack")
+	SetSoundDuration(gg_snd_DryadYesAttack2, 1498)
+	gg_snd_ArcherYesAttack1 = CreateSound("Units\\NightElf\\Archer\\ArcherYesAttack1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ArcherYesAttack1, "ArcherYesAttack")
+	SetSoundDuration(gg_snd_ArcherYesAttack1, 1013)
+	gg_snd_ArcherPissed7 = CreateSound("Units\\NightElf\\Archer\\ArcherPissed7.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_ArcherPissed7, "ArcherPissed")
+	SetSoundDuration(gg_snd_ArcherPissed7, 2824)
+	gg_snd_JainaYes3 = CreateSound("Units\\Human\\Jaina\\JainaYes3.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_JainaYes3, "JainaYes")
+	SetSoundDuration(gg_snd_JainaYes3, 917)
+	SetSoundPitch(gg_snd_JainaYes3, 1.1)
+	gg_snd_WarlordYesAttack5 = CreateSound("Units\\Demon\\ChaosWarlord\\WarlordYesAttack5.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_WarlordYesAttack5, "ChaosWarlordYesAttack")
+	SetSoundDuration(gg_snd_WarlordYesAttack5, 3007)
+	SetSoundPitch(gg_snd_WarlordYesAttack5, 1.4)
+	gg_snd_FurionWhat1 = CreateSound("Units\\NightElf\\Furion\\FurionWhat1.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_FurionWhat1, "FurionWhat")
+	SetSoundDuration(gg_snd_FurionWhat1, 2167)
+	gg_snd_HeroDreadlordPissed5 = CreateSound("Units\\Undead\\HeroDreadLord\\HeroDreadlordPissed5.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_HeroDreadlordPissed5, "HeroDreadLordPissed")
+	SetSoundDuration(gg_snd_HeroDreadlordPissed5, 8893)
+	gg_snd_DeathKnightWhat1 = CreateSound("Units\\Undead\\HeroDeathKnight\\DeathKnightWhat1.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_DeathKnightWhat1, "HeroDeathKnightWhat")
+	SetSoundDuration(gg_snd_DeathKnightWhat1, 1519)
+	gg_snd_1Nevermind = CreateSound("war3mapImported\\1Nevermind.wav", false, false, false, 10, 10, "")
+	SetSoundChannel(gg_snd_1Nevermind, 0)
+	SetSoundVolume(gg_snd_1Nevermind, 127)
+	SetSoundPitch(gg_snd_1Nevermind, 1.0)
+	gg_snd_P2 = CreateSound("war3mapImported\\P2.wav", false, false, false, 10, 10, "")
+	SetSoundChannel(gg_snd_P2, 0)
+	SetSoundVolume(gg_snd_P2, 127)
+	SetSoundPitch(gg_snd_P2, 1.0)
+	gg_snd_VultureWhat1 = CreateSound("Units\\Critters\\Vulture\\VultureWhat1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_VultureWhat1, "VultureWhat")
+	SetSoundDuration(gg_snd_VultureWhat1, 1756)
+	gg_snd_GoblinMerchantWhat1 = CreateSound("Sound\\Buildings\\Other\\Merchant\\GoblinMerchantWhat1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_GoblinMerchantWhat1, "MerchantWhat")
+	SetSoundDuration(gg_snd_GoblinMerchantWhat1, 583)
+	gg_snd_TyrandeWhat4 = CreateSound("Units\\NightElf\\Tyrande\\TyrandeWhat4.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_TyrandeWhat4, "TyrandeWhat")
+	SetSoundDuration(gg_snd_TyrandeWhat4, 1797)
+	SetSoundPitch(gg_snd_TyrandeWhat4, 0.8)
+	gg_snd_HeroArchMageWhat4 = CreateSound("Units\\Human\\HeroArchMage\\HeroArchMageWhat4.wav", false, false, true, 10, 10, "HeroAcksEAX")
+	SetSoundParamsFromLabel(gg_snd_HeroArchMageWhat4, "HeroArchMageWhat")
+	SetSoundDuration(gg_snd_HeroArchMageWhat4, 958)
+	SetSoundPitch(gg_snd_HeroArchMageWhat4, 0.9)
+	gg_snd_WolfriderPissed3 = CreateSound("Units\\Orc\\Wolfrider\\WolfriderPissed3.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_WolfriderPissed3, "WolfriderPissed")
+	SetSoundDuration(gg_snd_WolfriderPissed3, 4795)
+	gg_snd_BuildingDeathSmallHuman = CreateSound("Sound\\Buildings\\Death\\BuildingDeathSmallHuman.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_BuildingDeathSmallHuman, "RockWallDeath")
+	SetSoundDuration(gg_snd_BuildingDeathSmallHuman, 2368)
+	SetSoundPitch(gg_snd_BuildingDeathSmallHuman, 0.8)
+	gg_snd_OgreWhat1 = CreateSound("Units\\Creeps\\Ogre\\OgreWhat1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_OgreWhat1, "OgreWhat")
+	SetSoundDuration(gg_snd_OgreWhat1, 1398)
+	SetSoundPitch(gg_snd_OgreWhat1, 1.1)
+	gg_snd_HarpyYes1 = CreateSound("Units\\Creeps\\Harpy\\HarpyYes1.wav", false, false, true, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_HarpyYes1, "HarpyYes")
+	SetSoundDuration(gg_snd_HarpyYes1, 853)
+	SetSoundVolume(gg_snd_HarpyYes1, 127)
+	SetSoundPitch(gg_snd_HarpyYes1, 0.9)
+	gg_snd_WarlockAppears = CreateSound("Sound\\Ambient\\DoodadEffects\\WarlockAppears.wav", false, false, false, 10, 10, "DefaultEAXON")
+	SetSoundParamsFromLabel(gg_snd_WarlockAppears, "ArchimondeAppearsSound")
+	SetSoundDuration(gg_snd_WarlockAppears, 7361)
+
+function cinematic()
+	SetDoodadAnimationRectBJ("death", 1498379366, GetPlayableMapRect())
+	SetDoodadAnimationRectBJ("death", 1498375730, GetPlayableMapRect())
+	SetDoodadAnimationRectBJ("death", 1498375795, GetPlayableMapRect())
+	SetTimeOfDay(4.00)
+	SetDoodadAnimationRectBJ("death", 1498375778, GetPlayableMapRect())
+	SetDoodadAnimationRectBJ("death", 1498377314, GetPlayableMapRect())
+	SetDoodadAnimationRectBJ("decay", 1313826416, GetPlayableMapRect())
+	PanCameraToTimedLocForPlayer(Player(0), GetRectCenter(gg_rct_Region_000), 0.)
+	CameraSetupApplyForPlayer(true, gg_cam_Camera_001, Player(0), 3.00)
+	CinematicModeBJ(true, GetPlayersAll())
+	ShowInterfaceForceOff(GetPlayersAll(), 2.)
+	TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_001", gg_snd_MuradinYes2, "TRIGSTR_002", bj_TIMETYPE_ADD, 0., true)
+	TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_013", gg_snd_FurionWhat4, "TRIGSTR_014", bj_TIMETYPE_ADD, 0., true)
+	TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_015", gg_snd_KeeperOfTheGroveYes5, "TRIGSTR_016", bj_TIMETYPE_ADD, 0., true)
+	doAfter(5.00) ->
+		TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_017", gg_snd_IllidanWhat2, "TRIGSTR_018", bj_TIMETYPE_ADD, 0., true)
+		doAfter(2.) ->
+			SetDoodadAnimationRectBJ("stand", 1498377314, GetPlayableMapRect())
+			TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_019", gg_snd_KeeperOfTheGroveYes3, "TRIGSTR_020", bj_TIMETYPE_ADD, 0., true)
+			SetDoodadAnimationRectBJ("stand", 1498375778, GetPlayableMapRect())
+			doAfter(1.00) ->
+				TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_021", gg_snd_HeroDemonHunterYes4, "TRIGSTR_022", bj_TIMETYPE_ADD, 0., true)
+				doAfter(0.70) ->
+					TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Ekgg_0007, "TRIGSTR_023", gg_snd_IllidanPissed1, "TRIGSTR_024", bj_TIMETYPE_ADD, 1.00, true)
+					TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_025", gg_snd_IllidanPissed3, "TRIGSTR_026", bj_TIMETYPE_ADD, 1.00, true)
+					TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_nwat_0002, "TRIGSTR_027", gg_snd_ArcherPissed6, "TRIGSTR_028", bj_TIMETYPE_ADD, 1.00, true)
+					doAfter(2.) ->
+						IssuePointOrderLocBJ(gg_unit_Eill_0004, "move", GetRectCenter(gg_rct_Region_001))
+						TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_029", gg_snd_VillagerMAWhat4, "TRIGSTR_030", bj_TIMETYPE_ADD, 1.00, true)
+						TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_eshd_0000, "TRIGSTR_031", gg_snd_ShandrisPissed2, "TRIGSTR_032", bj_TIMETYPE_ADD, 1.00, true)
+						IssuePointOrderLocBJ(gg_unit_Eill_0004, "move", GetRectCenter(gg_rct_Region_002))
+						doAfter(3.00) ->
+							TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_033", gg_snd_VillagerMAWhat6, "TRIGSTR_034", bj_TIMETYPE_ADD, 0.50, true)
+							TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_edry_0005, "TRIGSTR_035", gg_snd_DryadPissed1, "TRIGSTR_036", bj_TIMETYPE_ADD, 0.50, true)
+							IssuePointOrderLocBJ(gg_unit_Eill_0004, "move", GetRectCenter(gg_rct_Region_003))
+							doAfter(2.00) ->
+								SetUnitFacingToFaceLocTimed(gg_unit_Eill_0004, GetRectCenter(gg_rct_Region_000), 2.00)
+								TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Ekgg_0007, "TRIGSTR_037", gg_snd_O04Mannoroth38, "TRIGSTR_038", bj_TIMETYPE_ADD, 0.50, true)
+								TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_039", gg_snd_U04AArthas09, "TRIGSTR_040", bj_TIMETYPE_ADD, 0.50, true)
+								TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Ekgg_0007, "TRIGSTR_041", gg_snd_HeroPaladinWhat2, "TRIGSTR_042", bj_TIMETYPE_ADD, 0.50, true)
+								TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_049", gg_snd_IllidanPissed5, "TRIGSTR_050", bj_TIMETYPE_ADD, 0.50, true)
+								IssueImmediateOrderBJ(gg_unit_Eill_0004, "metamorphosis")
+								doAfter(1.00) -> // Let's get to fightin'; Excellent choice
+									TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Ekgg_0007, "TRIGSTR_043", gg_snd_MortarTeamWhat1, "TRIGSTR_044", bj_TIMETYPE_ADD, 1.00, true)
+									TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_045", gg_snd_HeroBladeMasterYes4, "TRIGSTR_046", bj_TIMETYPE_ADD, 1.00, true)
+									IssueTargetOrder(gg_unit_Eill_0004, "attackonce", gg_unit_Ekgg_0007)
+									IssueTargetOrder(gg_unit_Ekgg_0007, "attackonce", gg_unit_Eill_0004)
+									doAfter(2.00) ->
+										TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Etyr_0003, "TRIGSTR_047", gg_snd_HeroMoonPriestessWhat2, "TRIGSTR_048", bj_TIMETYPE_ADD, 0., true)
+										IssueTargetOrderBJ(gg_unit_eshd_0000, "attackonce", gg_unit_Ekgg_0007)
+										doAfter(2.00) ->
+											TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_eshd_0000, "TRIGSTR_051", gg_snd_ShandrisPissed3, "TRIGSTR_052", bj_TIMETYPE_ADD, 0., true)
+											TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Etyr_0003, "TRIGSTR_053", gg_snd_ShandrisPissed4, "TRIGSTR_054", bj_TIMETYPE_ADD, 0., true)
+											doAfter(1.00) ->
+												TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_055", gg_snd_HeroDemonHunterPissed7, "TRIGSTR_056", bj_TIMETYPE_ADD, 0., true)
+												doAfter(1.00) ->
+													TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_057", gg_snd_IllidanPissed401, "TRIGSTR_058", bj_TIMETYPE_ADD, 1.00, true)
+													TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_059", gg_snd_FurionYesAttack2, "TRIGSTR_060", bj_TIMETYPE_ADD, 1.00, true)
+													TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_063", gg_snd_IllidanYes1, "TRIGSTR_064", bj_TIMETYPE_ADD, 1.00, true)
+													TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_065", gg_snd_DryadPissed2, "TRIGSTR_066", bj_TIMETYPE_ADD, 1.00, true)
+													IssuePointOrderLocBJ(gg_unit_Efur_0001, "move", GetRectCenter(gg_rct_Region_004))
+													doAfter(2.) ->
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_071", gg_snd_KeeperOfTheGrovePissed5, "TRIGSTR_072", bj_TIMETYPE_ADD, 1.00, true)
+														IssuePointOrderLocBJ(gg_unit_eshd_0000, "move", GetRectCenter(gg_rct_Region_005))
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_eshd_0000, "TRIGSTR_067", gg_snd_ShandrisYes1, "TRIGSTR_068", bj_TIMETYPE_ADD, 0., true)
+														IssuePointOrderLocBJ(gg_unit_edry_0005, "move", GetRectCenter(gg_rct_Region_002))
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_edry_0005, "TRIGSTR_069", gg_snd_DryadWhat1, "TRIGSTR_070", bj_TIMETYPE_ADD, 0., true)
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_eshd_0000, "TRIGSTR_073", gg_snd_ShandrisYesAttack2, "TRIGSTR_074", bj_TIMETYPE_ADD, 1.00, true)
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_edry_0005, "TRIGSTR_075", gg_snd_DryadYesAttack2, "TRIGSTR_076", bj_TIMETYPE_ADD, 1.00, true)
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_eshd_0000, "TRIGSTR_077", gg_snd_ArcherYesAttack1, "TRIGSTR_078", bj_TIMETYPE_ADD, 1.00, true)
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_nwat_0002, "TRIGSTR_079", gg_snd_JainaYes3, "TRIGSTR_080", bj_TIMETYPE_ADD, 1.00, true)
+														TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_eshd_0000, "TRIGSTR_081", gg_snd_ArcherPissed7, "TRIGSTR_082", bj_TIMETYPE_ADD, 1.00, true)
+														IssueTargetOrderBJ(gg_unit_eshd_0000, "attackonce", gg_unit_edry_0005)
+														doAfter(1.00) ->
+															gg_unit_edry_0005.addEffect(Objects.humanSmallDeathExplode, "origin").destr()
+															TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_eshd_0000, "TRIGSTR_083", gg_snd_WarlordYesAttack5, "TRIGSTR_084", bj_TIMETYPE_ADD, 1.00, true)
+															PlaySoundBJ(gg_snd_P2)
+															TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_085", null, "TRIGSTR_086", bj_TIMETYPE_ADD, 1.00, true)
+															SetUnitColor(gg_unit_ewsp_0008, PLAYER_COLOR_LIGHT_GRAY)
+															IssuePointOrderLocBJ(gg_unit_Efur_0001, "move", GetRectCenter(gg_rct_Region_006))
+															TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_087", gg_snd_FurionWhat1, "TRIGSTR_088", bj_TIMETYPE_ADD, 1.00, true)
+															doAfter(1.00) -> // Something is amiss?; <Darkness calls>; You called?
+																TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_089", gg_snd_HeroDreadlordPissed5, "TRIGSTR_090", bj_TIMETYPE_ADD, 1.00, true)
+																TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_091", gg_snd_DeathKnightWhat1, "TRIGSTR_092", bj_TIMETYPE_ADD, 1.00, true)
+																PlaySoundBJ(gg_snd_1Nevermind)
+																IssuePointOrderLocBJ(gg_unit_edtm_0009, "move", GetRectCenter(gg_rct_Region_007))
+																TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_ewsp_0008, "TRIGSTR_093", null, "TRIGSTR_094", bj_TIMETYPE_ADD, 1.00, true)
+																TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_edtm_0009, "TRIGSTR_095", gg_snd_VultureWhat1, "TRIGSTR_096", bj_TIMETYPE_ADD, 0., true)
+																IssueImmediateOrderBJ(gg_unit_edtm_0009, "unravenform")
+																SetUnitAnimation(gg_unit_edtm_0009, "stand")
+																TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), 1701080948, "TRIGSTR_097", GetRectCenter(GetPlayableMapRect()), gg_snd_GoblinMerchantWhat1, "TRIGSTR_098", bj_TIMETYPE_ADD, 0., true)
+																TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), 1701080948, "TRIGSTR_099", GetRectCenter(GetPlayableMapRect()), gg_snd_TyrandeWhat4, "TRIGSTR_100", bj_TIMETYPE_ADD, 1.00, true)
+																TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_103", gg_snd_HeroArchMageWhat4, "TRIGSTR_104", bj_TIMETYPE_ADD, 0., true)
+																IssueTargetOrderBJ(gg_unit_Efur_0001, "entanglingroots", gg_unit_edtm_0009)
+																doAfter(2.) ->
+																	KillUnit(gg_unit_edtm_0009)
+																	IssuePointOrderLocBJ(gg_unit_Eill_0004, "move", GetRectCenter(gg_rct_Region_009))
+																	CameraSetupApplyForPlayer(true, gg_cam_Camera_003, Player(0), 3.00)
+																	IssuePointOrderLocBJ(gg_unit_Efur_0001, "move", GetRectCenter(gg_rct_Region_008))
+																	doAfter(3.50) ->
+																		IssueImmediateOrderBJ(gg_unit_Efur_0001, "tranquility")
+																		doAfter(5.00) ->
+																			TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Efur_0001, "TRIGSTR_107", gg_snd_OgreWhat1, "TRIGSTR_108", bj_TIMETYPE_ADD, 0., true)
+																			keepFlushing = false
+																			CameraSetupApplyForPlayer(true, gg_cam_Camera_002, Player(0), 2.00)
+																			doAfter(3.00) ->
+																				SetUnitManaPercentBJ(gg_unit_emow_0010, 100.)
+																				IssuePointOrderLocBJ(gg_unit_Efur_0001, "move", GetRectCenter(gg_rct_Region_006))
+																				doAfter(3.00) ->
+																					CameraSetupApplyForPlayer(true, gg_cam_Camera_001, Player(0), 3.00)
+																					PlaySoundBJ(gg_snd_WolfriderPissed3)
+																					TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Eill_0004, "TRIGSTR_105", null, "TRIGSTR_106", bj_TIMETYPE_ADD, 0., false)
+																					doAfter(1.20) ->
+																						StopSoundBJ(gg_snd_WolfriderPissed3, false)
+																						doAfter(3.80) ->
+																							CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2., "ReplaceableTextures\\CameraMasks\\White_mask.blp", 0., 0., 0., 0.)
+																							doAfter(2.) ->
+																								SetDoodadAnimationRectBJ("stand", 1498379366, GetPlayableMapRect())
+																								SetDoodadAnimationRectBJ("stand", 1498375730, GetPlayableMapRect())
+																								SetDoodadAnimationRectBJ("stand", 1498375795, GetPlayableMapRect())
+																								PlaySoundBJ(gg_snd_BuildingDeathSmallHuman)
+																								KillUnit(gg_unit_Etyr_0003)
+																								KillUnit(gg_unit_edry_0005)
+																								gg_unit_eshd_0000.addEffect(Objects.humanSmallDeathExplode, "origin").destr()
+																								gg_unit_nwat_0002.addEffect(Objects.humanSmallDeathExplode, "origin").destr()
+																								gg_unit_emow_0010.addEffect(Objects.humanSmallDeathExplode, "origin").destr()
+																								gg_unit_Efur_0001.addEffect(Objects.humanSmallDeathExplode, "origin").destr()
+																								gg_unit_Eill_0004.addEffect(Objects.humanSmallDeathExplode, "origin").destr()
+																								CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2., "ReplaceableTextures\\CameraMasks\\White_mask.blp", 0., 0., 0., 0.)
+																								doAfter(1.00) ->
+																									PlaySoundBJ(gg_snd_HarpyYes1)
+																									doAfter(2.00) ->
+																										DisplayTimedTextToForce(GetPlayersAll(), 40.00, "TRIGSTR_109")
+																										doAfter(3.00) ->
+																											TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), Player(0), 1969316463, "TRIGSTR_110", GetRectCenter(GetPlayableMapRect()), gg_snd_WarlockAppears, "TRIGSTR_111", bj_TIMETYPE_ADD, 2.00, true)
+																											CinematicModeBJ(false, GetPlayersAll())
+																											ShowInterfaceForceOn(GetPlayersAll(), 2)
+
+init
+	for i = 0 to 23
+		for j = i + 1 to 23
+			SetPlayerAlliance(Player(i), Player(j), ALLIANCE_PASSIVE, true)
+			SetPlayerAlliance(Player(i), Player(j), ALLIANCE_SHARED_VISION, true)
+			SetPlayerAlliance(Player(j), Player(i), ALLIANCE_PASSIVE, true)
+			SetPlayerAlliance(Player(j), Player(i), ALLIANCE_SHARED_VISION, true)
+	doAfter(0., () -> function initSounds)
+
+	doAfter(0.5, () -> function cinematic)
