@@ -1,0 +1,45 @@
+package Death
+
+import HashMap
+import RegisterEvents
+
+class DeathRef
+    bool isHero
+    unit which = null
+    int typ = 0
+    item ite
+    player owner
+
+    construct(unit src, item _ite)
+        ite = _ite
+        isHero = src.isType(UNIT_TYPE_HERO)
+        owner = src.getOwner()
+        if isHero
+            which = src
+        else
+            typ = src.getTypeId()
+
+    ondestroy
+        ite.remove()
+
+
+let map = new HashMap<item, DeathRef>()
+init
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_DEATH) ->
+        let tU = GetTriggerUnit()
+        if GetTriggerUnit().getOwner().getId() < 24 and (tU.hasAbility('Aihn') or tU.hasAbility('Aien') or tU.hasAbility('AInv'))
+            let i = createItem('I000', GetTriggerUnit().getPos())
+            let ref = new DeathRef(GetTriggerUnit(), i)
+
+            map.put(i, ref)
+
+    registerPlayerUnitEvent(EVENT_PLAYER_UNIT_SPELL_FINISH) ->
+        for i = 0 to 5
+            let ite = GetTriggerUnit().itemInSlot(i)
+            if ite.getTypeId() == 'I000'
+                let ref = map.get(ite)
+                if ref.isHero
+                    ReviveHero(ref.which, GetTriggerUnit().getX(), GetTriggerUnit().getY(), true)
+                else
+                    createUnit(ref.owner, ref.typ, GetTriggerUnit().getPos(), angle(0.))
+                destroy ref

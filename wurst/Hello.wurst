@@ -3,6 +3,10 @@ package Hello
 import Assets
 import ClosureTimers
 import RegisterEvents
+import SoundUtils
+
+import CreepAi
+import UnitsApi
 
 sound s_MuradinYes2 = null
 sound s_FurionWhat4 = null
@@ -56,16 +60,6 @@ sound s_OgreWhat1 = null
 sound s_HarpyYes1 = null
 sound s_WarlockAppears = null
 
-unit u_eshd_0000 = null
-unit u_Efur_0001 = null
-unit u_nwat_0002 = null
-unit u_Etyr_0003 = null
-unit u_Eill_0004 = null
-unit u_edry_0005 = null
-unit u_Ekgg_0007 = null
-unit u_ewsp_0008 = null
-unit u_edtm_0009 = null
-unit u_emow_0010 = null
 var keepFlushing = true
 function toiletFlush()
 	doPeriodically(ANIMATION_PERIOD) cb ->
@@ -246,20 +240,179 @@ function initSounds()
 	SetSoundParamsFromLabel(s_WarlockAppears, "ArchimondeAppearsSound")
 	SetSoundDuration(s_WarlockAppears, 7361)
 
+function effect.destr(real after)
+	doAfter(after) ->
+		this.destr()
+
 var cinematicPlaying = true
+let grp = CreateGroup()
+var playersPlaying = 0
+var heroesPlaying = 0
+let tim = CreateTimer()
+let dia = CreateTimerDialog(tim)
+int count
+unit u = null
 function endCinematic()
 	if cinematicPlaying
 		cinematicPlaying = false
 		CinematicModeBJ(false, GetPlayersAll())
 		ShowInterfaceForceOn(GetPlayersAll(), 2)
+		doAfter(1.) ->
+			// Remove unused heroes.
+			grp.enumUnitsInRect(bj_mapInitialPlayableArea)
+			keepFlushing = false
+			for u from grp
+				if u.getOwner().getSlotState() != PLAYER_SLOT_STATE_PLAYING and u.getOwner().getId() <= 23
+					addEffect(Abilities.massTeleportTarget, u.getPos()).destr(1.)
+					doAfter(0.5) ->
+						u.remove()
+
+			doAfter(1.) ->
+				ClearTextMessages()
+				print("|cffffcc00Primary Quest:|r Protect the toilet.")
+				destroy new SoundDefinition(Sounds.questNew, false)..play()
+				SetPlayerState(Player(PLAYER_NEUTRAL_AGGRESSIVE), PLAYER_STATE_NO_CREEP_SLEEP, 1)
+
+				// Round 1.
+				TimerDialogSetTitle(dia, "Round 1")
+				TimerDialogDisplay(dia, true)
+				tim.start(10.) ->
+					TimerDialogDisplay(dia, false)
+					destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+					count = heroesPlaying * 2
+					for i = 0 to count - 1
+						u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'ogru', vec2(-1538., -2557.), angle(0.))
+							..addCreepAi()
+					print("|cffffcc00Round 1:|r " + count.toString() + " " + u.getName())
+
+					doAfter(10.) ->
+						TimerDialogSetTitle(dia, "Round 2")
+						TimerDialogDisplay(dia, true)
+						tim.start(25.) ->
+							TimerDialogDisplay(dia, false)
+							destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+							count = heroesPlaying * 4
+							for i = 0 to count - 1
+								u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'ohun', vec2(-1538., -2557.), angle(0.))
+									..addCreepAi()
+							print("|cffffcc00Round 2:|r " + count.toString() + " " + u.getName())
+
+							doAfter(10.) ->
+								TimerDialogSetTitle(dia, "Round 3")
+								TimerDialogDisplay(dia, true)
+								tim.start(20.) ->
+									TimerDialogDisplay(dia, false)
+									destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+									count = heroesPlaying * 4
+									for i = 0 to count - 1
+										u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'orai', vec2(-1538., -2557.), angle(0.))
+											..addCreepAi()
+									print("|cffffcc00Round 3:|r " + count.toString() + " " + u.getName())
+
+									doAfter(10.) ->
+										TimerDialogSetTitle(dia, "Round 4")
+										TimerDialogDisplay(dia, true)
+										tim.start(20.) ->
+											TimerDialogDisplay(dia, false)
+											destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+											count = heroesPlaying * 3
+											for i = 0 to count - 1
+												u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'otau', vec2(-1538., -2557.), angle(0.))
+													..addCreepAi()
+											print("|cffffcc00Round 4:|r " + count.toString() + " " + u.getName())
+
+											doAfter(10.) ->
+												TimerDialogSetTitle(dia, "Round 5")
+												TimerDialogDisplay(dia, true)
+												tim.start(10.) ->
+													TimerDialogDisplay(dia, false)
+													destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+													count = heroesPlaying * 1
+													for i = 0 to count - 1
+														u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'ocat', vec2(-1538., -2557.), angle(0.))
+															..addCreepAi()
+													print("|cffffcc00Round 5:|r " + count.toString() + " " + u.getName())
+
+													doAfter(10.) ->
+														TimerDialogSetTitle(dia, "Round 6")
+														TimerDialogDisplay(dia, true)
+														tim.start(30.) ->
+															TimerDialogDisplay(dia, false)
+															destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+															count = heroesPlaying * 8
+															for i = 0 to count - 1
+																u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'ugho', vec2(-1538., -2557.), angle(0.))
+																	..addCreepAi()
+															print("|cffffcc00Round 6:|r " + count.toString() + " " + u.getName())
+
+															doAfter(10.) ->
+																TimerDialogSetTitle(dia, "Round 7")
+																TimerDialogDisplay(dia, true)
+																tim.start(15.) ->
+																	TimerDialogDisplay(dia, false)
+																	destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+																	count = heroesPlaying * 6
+																	for i = 0 to count - 1
+																		u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'unec', vec2(-1538., -2557.), angle(0.))
+																			..addCreepAi()
+																	print("|cffffcc00Round 7:|r " + count.toString() + " " + u.getName())
+
+																	doAfter(10.) ->
+																		TimerDialogSetTitle(dia, "Round 8")
+																		TimerDialogDisplay(dia, true)
+																		tim.start(25.) ->
+																			TimerDialogDisplay(dia, false)
+																			destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+																			count = heroesPlaying * 5
+																			for i = 0 to count - 1
+																				u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'uabo', vec2(-1538., -2557.), angle(0.))
+																					..addCreepAi()
+																			print("|cffffcc00Round 8:|r " + count.toString() + " " + u.getName())
+
+																			doAfter(10.) ->
+																				TimerDialogSetTitle(dia, "Round 9")
+																				TimerDialogDisplay(dia, true)
+																				tim.start(10.) ->
+																					TimerDialogDisplay(dia, false)
+																					destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+																					count = heroesPlaying * 6
+																					for i = 0 to count - 1
+																						u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'ucry', vec2(-1538., -2557.), angle(0.))
+																							..addCreepAi()
+																					print("|cffffcc00Round 9:|r " + count.toString() + " " + u.getName())
+
+																					doAfter(10.) ->
+																						TimerDialogSetTitle(dia, "Round 10")
+																						TimerDialogDisplay(dia, true)
+																						tim.start(5.) ->
+																							TimerDialogDisplay(dia, false)
+																							destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+																							count = heroesPlaying * 2
+																							for i = 0 to count - 1
+																								u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'umtw', vec2(-1538., -2557.), angle(0.))
+																									..addCreepAi()
+																							print("|cffffcc00Round 10:|r " + count.toString() + " " + u.getName())
+
+																							doAfter(10.) ->
+																								TimerDialogSetTitle(dia, "Round 11")
+																								TimerDialogDisplay(dia, true)
+																								tim.start(60.) ->
+																									TimerDialogDisplay(dia, false)
+																									destroy new SoundDefinition(Sounds.questActivateWhat1, false)..play()
+																									count = heroesPlaying * 5
+																									for i = 0 to count - 1
+																										u = createUnit(Player(PLAYER_NEUTRAL_AGGRESSIVE), 'nfov', vec2(-1538., -2557.), angle(0.))
+																											..addCreepAi()
+																									print("|cffffcc00Round 11:|r " + count.toString() + " " + u.getName())
+
+
 
 var quitCount = 0
-int quitsNeeded = 0
+var quitsNeeded = 0
 function checkContinueCinematic() returns bool
 	if cinematicPlaying
 		if quitCount >= quitsNeeded
 			endCinematic()
-			print("|cffffcc00Cinematic skipped by popular vote...|r")
 			return false
 		return true
 	return false
@@ -269,13 +422,13 @@ function initUnits()
 	var tmpV = vec2(-2000., 1883.)
 	u_eshd_0000 = createUnit(Player(20), 'eshd', tmpV, tmpV.angleTo(ctr))
 	tmpV = vec2(-2491., 2343.)
-	u_Efur_0001 = createUnit(Player(3),  'Efur', tmpV, tmpV.angleTo(ctr))
+	u_Efur_0001 = createUnit(Player(3),  'Efur', tmpV, tmpV.angleTo(ctr))..setLevel(7, false)..addAbility('AEer')..addAbility('AEtq')
 	tmpV = vec2(-2041., 2277.)
 	u_nwat_0002 = createUnit(Player(2),  'nwat', tmpV, tmpV.angleTo(ctr))
 	tmpV = vec2(-2626., 2045.)
 	u_Etyr_0003 = createUnit(Player(6),  'Etyr', tmpV, tmpV.angleTo(ctr))
 	tmpV = vec2(-2265., 1728.)
-	u_Eill_0004 = createUnit(Player(1),  'Eill', tmpV, tmpV.angleTo(ctr))
+	u_Eill_0004 = createUnit(Player(1),  'Eill', tmpV, tmpV.angleTo(ctr))..setLevel(7, false)..addAbility('AEme')
 	tmpV = vec2(-2513., 1753.)
 	u_edry_0005 = createUnit(Player(12), 'edry', tmpV, tmpV.angleTo(ctr))
 	tmpV = vec2(-1933., 2043.)
@@ -287,19 +440,31 @@ function initUnits()
 	tmpV = vec2(-2337., 2721.)
 	u_emow_0010 = createUnit(Player(PLAYER_NEUTRAL_PASSIVE), 'emow', tmpV, angle(3. * bj_PI / 2.))
 
+	CreateTrigger()..registerUnitEvent(u_emow_0010, EVENT_UNIT_DEATH)..addAction() ->
+		print("|cffffcc00The toilet died - you lose!|r")
+		doAfter(1.) ->
+			destroy new SoundDefinition(Sounds.questFailed, false)..play()
+			doAfter(1.) ->
+				CustomVictoryBJ(GetLocalPlayer(), true, false )
+		grp.enumUnitsInRect(bj_mapInitialPlayableArea)
+		for u in grp
+			u.pause()
+			u.setTimeScale(0.)
+			u.setInvulnerable(true)
 
 function transmissionThen(unit u, string name, sound s, string text, real extraTime, CallbackSingle cb) returns CallbackSingle
-	TransmissionFromUnitWithNameBJ(bj_FORCE_ALL_PLAYERS, u, name, s, text, bj_TIMETYPE_ADD, 0., false)
-	doAfter((s.getDuration().toReal() / 1000) + extraTime) ->
-		cb.call()
+	if checkContinueCinematic()
+		TransmissionFromUnitWithNameBJ(bj_FORCE_ALL_PLAYERS, u, name, s, text, bj_TIMETYPE_ADD, 0., false)
+		doAfter((s.getDuration().toReal() / 1000) + extraTime) ->
+			cb.call()
 	return cb
 
 function cinematicSeq3()
 	transmissionThen(u_Eill_0004, "Illidan", s_IllidanYes1, "Easily.", 1.00) ->
-		transmissionThen(u_Efur_0001, "Furion", s_DryadPissed2, "Dough!", 1.00) ->
+		transmissionThen(u_Efur_0001, "Furion", s_DryadPissed2, "D'oh!", 1.00) ->
 			IssuePointOrderLocBJ(u_Efur_0001, "move", GetRectCenter(gg_rct_Region_004))
 			doAfter(2.) ->
-				transmissionThen(u_Eill_0004, "Illidan", s_KeeperOfTheGrovePissed5, "Free rides- for the ladies!", 1.00) ->
+				transmissionThen(u_Eill_0004, "Illidan", s_KeeperOfTheGrovePissed5, "Free rides - for the ladies.", 1.00) ->
 					IssuePointOrderLocBJ(u_eshd_0000, "move", GetRectCenter(gg_rct_Region_005))
 					transmissionThen(u_eshd_0000, "Shandris", s_ShandrisYes1, "Excellent!", 0.) ->
 						IssuePointOrderLocBJ(u_edry_0005, "move", GetRectCenter(gg_rct_Region_002))
@@ -308,7 +473,7 @@ function cinematicSeq3()
 								transmissionThen(u_edry_0005, "Dryad", s_DryadYesAttack2, "Taste my spear!", 1.00) ->
 									transmissionThen(u_eshd_0000, "Shandris", s_ArcherYesAttack1, "I'll give it a shot.", 1.00) ->
 										transmissionThen(u_nwat_0002, "Sentry", s_JainaYes3, "Sounds interesting...", 1.00) ->
-											transmissionThen(u_eshd_0000, "Shandris", s_ArcherPissed7, "A shot through the heart, that's what I ment.", 1.00) ->
+											transmissionThen(u_eshd_0000, "Shandris", s_ArcherPissed7, "A shot through the heart - that's what I meant.", 1.00) ->
 												IssueTargetOrderBJ(u_eshd_0000, "attackonce", u_edry_0005)
 												doAfter(1.00) ->
 													u_edry_0005.addEffect(Objects.humanSmallDeathExplode, "origin").destr()
@@ -331,14 +496,14 @@ function cinematicSeq3()
 																				transmissionThen(u_Efur_0001, "Furion", s_HeroArchMageWhat4, "Well?", 0.) ->
 																					IssueTargetOrderBJ(u_Efur_0001, "entanglingroots", u_edtm_0009)
 																					doAfter(2.) ->
-																						// KillUnit(u_edtm_0009)
+																						u_edtm_0009.setAnimation("death")
 																						IssuePointOrderLocBJ(u_Eill_0004, "move", GetRectCenter(gg_rct_Region_009))
 																						CameraSetupApplyForPlayer(true, gg_cam_Camera_003, GetLocalPlayer(), 3.00)
 																						IssuePointOrderLocBJ(u_Efur_0001, "move", GetRectCenter(gg_rct_Region_008))
 																						doAfter(3.50) ->
 																							IssueImmediateOrderBJ(u_Efur_0001, "tranquility")
 																							doAfter(5.00) ->
-																								transmissionThen(u_Efur_0001, "Furion", s_OgreWhat1, "(Urinating) What are you looking at?", 0.) ->
+																								transmissionThen(u_Efur_0001, "Furion", s_OgreWhat1, "(Urinating) What' you looking at?", 0.) ->
 																									keepFlushing = false
 																									CameraSetupApplyForPlayer(true, gg_cam_Camera_002, GetLocalPlayer(), 2.00)
 																									doAfter(3.00) ->
@@ -369,13 +534,14 @@ function cinematicSeq3()
 																															doAfter(2.00) ->
 																																DisplayTimedTextToForce(GetPlayersAll(), 40.00, "Don't piss near blue fire...")
 																																doAfter(3.00) ->
-																																	TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), GetLocalPlayer(), 1969316463, "Original PicNic created by", GetRectCenter(GetPlayableMapRect()), s_WarlockAppears, "Gal \"mix of origins!\" Weisberg", bj_TIMETYPE_ADD, 2.00, false)
-																																	endCinematic()
+																																	TransmissionFromUnitTypeWithNameBJ(GetPlayersAll(), GetLocalPlayer(), 1969316463, "Original PicNic created by", GetRectCenter(GetPlayableMapRect()), s_WarlockAppears, "Gal \"mix of origins!\" Weisberg", bj_TIMETYPE_ADD, 3., false)
+																																	doAfter(3.) ->
+																																		endCinematic()
 
 function cinematicSeq2()
 	transmissionThen(u_eshd_0000, "Shandris", s_ShandrisPissed2, "Look, I don't have time for this nonsense.", 1.00) ->
 		IssuePointOrderLocBJ(u_Eill_0004, "move", GetRectCenter(gg_rct_Region_002))
-		doAfter(3.00) ->
+		doAfter(2.7) ->
 			transmissionThen(u_Eill_0004, "Illidan", s_VillagerMAWhat6, "How' you doing?", 0.50) ->
 				transmissionThen(u_edry_0005, "Dryad", s_DryadPissed1, "I'm not the dryad you're looking for.", 0.50) ->
 					IssuePointOrderLocBJ(u_Eill_0004, "move", GetRectCenter(gg_rct_Region_003))
@@ -383,7 +549,7 @@ function cinematicSeq2()
 						SetUnitFacingToFaceLocTimed(u_Eill_0004, GetRectCenter(gg_rct_Region_000), 2.00)
 						transmissionThen(u_Ekgg_0007, "Cenarius' ghost", s_O04Mannoroth38, "Hahahahahahahahaha", 0.50) ->
 							transmissionThen(u_Eill_0004, "Illidan", s_U04AArthas09, "Shut up, you damn ghost!", 0.50) ->
-								transmissionThen(u_Ekgg_0007, "Cenarius' ghost", s_HeroPaladinWhat2, "Im not afraid.", 0.50) ->
+								transmissionThen(u_Ekgg_0007, "Cenarius' ghost", s_HeroPaladinWhat2, "I am not afraid.", 0.50) ->
 									transmissionThen(u_Eill_0004, "Illidan", s_IllidanPissed5, "None of them know my true power!", 0.50) ->
 										IssueImmediateOrderBJ(u_Eill_0004, "metamorphosis")
 										doAfter(1.00) -> // Let's get to fightin'; Excellent choice
@@ -397,8 +563,8 @@ function cinematicSeq2()
 															doAfter(2.00) ->
 																transmissionThen(u_eshd_0000, "Shandris", s_ShandrisPissed3, "I wonder why I never run out of arrows...", 0.) ->
 																	transmissionThen(u_Etyr_0003, "Tyrande", s_ShandrisPissed4, "I wish MY bow was socketed.", 1.) ->
-																		transmissionThen(u_Efur_0001, "Furion", s_HeroDemonHunterPissed7, "Darkness called, but I was on the phone so...", 1.) ->
-																			transmissionThen(u_Eill_0004, "Illidan", s_IllidanPissed401, "My brother shall pay for his betrayal.", 1.00) ->
+																		transmissionThen(u_Efur_0001, "Furion", s_HeroDemonHunterPissed7, "Darkness called, but I was on the phone so I missed him...", 1.) ->
+																			transmissionThen(u_Eill_0004, "Illidan", s_IllidanPissed401, "My brother will pay dearly for his betrayal.", 1.00) ->
 																				transmissionThen(u_Efur_0001, "Furion", s_FurionYesAttack2, "How dare you!?", 1.00) ->
 																					cinematicSeq3()
 
@@ -425,7 +591,7 @@ function cinematic()
 							transmissionThen(u_Eill_0004, "Illidan", s_HeroDemonHunterYes4, "At last!", 0.7) ->
 								transmissionThen(u_Ekgg_0007, "Cenarius' ghost", s_IllidanPissed1, "I've been caged in darkness.", 1.00) ->
 									transmissionThen(u_Eill_0004, "Illidan", s_IllidanPissed3, "I've been alone for ten thousand years.", 1.00) ->
-										transmissionThen(u_nwat_0002, "Sentry", s_ArcherPissed6, "My release date has been changed!", 2.) ->
+										transmissionThen(u_nwat_0002, "Sentry", s_ArcherPissed6, "My release date's been changed!", 2.) ->
 											IssuePointOrderLocBJ(u_Eill_0004, "move", GetRectCenter(gg_rct_Region_001))
 											transmissionThen(u_Eill_0004, "Illidan", s_VillagerMAWhat4, "Greetings, your highness!", 1.00) ->
 												cinematicSeq2()
@@ -434,22 +600,33 @@ function cinematic()
 bool array skipped
 init
 	initUnits()
-	registerPlayerEvent(EVENT_PLAYER_END_CINEMATIC) () ->
+	toiletFlush()
+	registerPlayerEvent(EVENT_PLAYER_END_CINEMATIC) ->
 		if skipped[GetTriggerPlayer().getId()] == false
 			printTimedToPlayer("|cffffcc00Cinematic skip vote registered.|r", 10., GetTriggerPlayer())
 			quitCount += 1
+			if quitCount >= quitsNeeded
+				print("|cffffcc00Cinematic skipped by popular vote...|r")
 			skipped[GetTriggerPlayer().getId()] = true
 
 	for i = 0 to 23
 		skipped[i] = false
-		if Player(i).getSlotState() == PLAYER_SLOT_STATE_PLAYING and Player(i).getController() == MAP_CONTROL_USER
-			quitsNeeded += 1
+		if Player(i).getSlotState() == PLAYER_SLOT_STATE_PLAYING
+			heroesPlaying += 1
+			if Player(i).getController() == MAP_CONTROL_USER
+				playersPlaying += 1
+		SetPlayerAlliance(Player(i), Player(PLAYER_NEUTRAL_PASSIVE), ALLIANCE_SHARED_VISION, true)
+		SetPlayerAlliance(Player(PLAYER_NEUTRAL_PASSIVE), Player(i), ALLIANCE_SHARED_VISION, true)
 
 		for j = i + 1 to 23
 			SetPlayerAlliance(Player(i), Player(j), ALLIANCE_PASSIVE, true)
 			SetPlayerAlliance(Player(i), Player(j), ALLIANCE_SHARED_VISION, true)
 			SetPlayerAlliance(Player(j), Player(i), ALLIANCE_PASSIVE, true)
 			SetPlayerAlliance(Player(j), Player(i), ALLIANCE_SHARED_VISION, true)
+	SetPlayerAlliance(Player(PLAYER_NEUTRAL_AGGRESSIVE), Player(PLAYER_NEUTRAL_PASSIVE), ALLIANCE_PASSIVE, false)
+
+	quitsNeeded = max(1, (2. * playersPlaying / 3.).toInt())
+
 	doAfter(0., () -> initSounds())
 
 	doAfter(0.5, () -> cinematic())

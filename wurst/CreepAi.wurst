@@ -1,0 +1,22 @@
+package CreepAi
+
+import ClosureTimers
+
+import UnitsApi
+
+let grp = CreateGroup()
+
+public function unit.addCreepAi()
+    grp.addUnit(this)
+
+int count
+init
+    doPeriodicallyCounted(1., 100000) cb ->
+        count = cb.getCount()
+        ForGroup(grp) ->
+            if GetEnumUnit().isAlive()
+                if count % 10 == 0
+                    GetEnumUnit().setPos(GetEnumUnit().getPos())
+                GetEnumUnit().issuePointOrder("attack", u_emow_0010.getPos())
+            else
+                grp.removeUnit(GetEnumUnit())

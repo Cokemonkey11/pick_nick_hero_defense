@@ -3,7 +3,7 @@ projectName: "pick_nick_hero_defense"
 dependencies:
 - "https://github.com/wurstscript/wurstStdlib2"
 buildMapData:
-  name: "DefaultName"
-  fileName: "DefaultFileName"
-  author: "DefaultAuthor"
-  playerCount: 1
+  name: "pick_nick_hero_defense 0.1.0"
+  fileName: "(24)pick_nick_hero_defense.0.1.0"
+  author: "Cokemonkey11"
+  playerCount: 24

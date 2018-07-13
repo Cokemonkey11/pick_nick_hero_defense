@@ -1,0 +1,12 @@
+package UnitsApi
+
+public unit u_eshd_0000 = null
+public unit u_Efur_0001 = null
+public unit u_nwat_0002 = null
+public unit u_Etyr_0003 = null
+public unit u_Eill_0004 = null
+public unit u_edry_0005 = null
+public unit u_Ekgg_0007 = null
+public unit u_ewsp_0008 = null
+public unit u_edtm_0009 = null
+public unit u_emow_0010 = null
